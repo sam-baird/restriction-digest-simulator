@@ -1,0 +1,12 @@
+{% extends "layout.html" %}
+    {% block title %}
+        Result
+    {% endblock %}
+{% block main %}
+    <p>Sorted: {{ sort_order }}</p>
+
+    {% for fragments in frag_info %}
+        <p style="text-align: left; font-weight: bold">Fragment {{ fragments.frag_num }} - {{ fragments.size }} bp</p>
+        <p style="text-align: left; word-break: break-all">{{ fragments.seq }}</p>
+    {% endfor %}
+{% endblock %}

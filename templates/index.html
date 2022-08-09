@@ -1,0 +1,78 @@
+{% extends "layout.html" %}
+    {% block title %}
+        Home
+    {% endblock %}
+{% block main %}
+
+<form action="/" method="post" autocomplete="off">
+    <div class="form-group" style="text-align: left">
+        <label for="seq_input" style="font-weight: bold">Sequence</label>
+        <textarea required class="form-control" name="seq_input" rows="4" placeholder="Enter DNA sequence (5′ to 3′)"></textarea>
+        <div class="form-check form-check-inline">
+            <p style="font-size: 15px">Topology:</p>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="topology-options" value="linear" checked>
+            <label class="form-check-label" for="linear">linear</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="topology-options" value="linear">
+            <label class="form-check-label" for="circular">circular</label>
+        </div>
+    </div>
+    <div class="form-row" style="text-align: left">
+        <div class="col">
+            <label for="restriction-enzyme-select" style="font-weight: bold">Restriction enzyme 1</label>
+            <select class="form-control" name="restriction-enzyme-1">
+                <option selected disabled>Select a restriction enzyme</option>
+                {% for enzyme, sequence in enzymes %}
+                    <option value="{{ sequence }}">{{ enzyme }} - {{ sequence }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div style="padding: 25px">
+            <p>- OR -</p>
+        </div>
+        <div class="col" style="text-align: left">
+            <label for="recognition" style="font-weight: bold">Custom recognition sequence 1</label>
+            <input class="form-control" name="custom-rec-1" placeholder="Mark cut site with asterisk">
+        </div>
+    </div>
+    <div class="form-row" style="text-align: left">
+        <div class="col">
+            <label for="restriction-enzyme-select" style="font-weight: bold">Restriction enzyme 2 (optional)</label>
+            <select class="form-control" name="restriction-enzyme-2">
+                <option selected disabled>Select a restriction enzyme</option>
+                {% for enzyme, sequence in enzymes %}
+                    <option value="{{ sequence }}">{{ enzyme }} - {{ sequence }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div style="padding: 25px">
+            <p>- OR -</p>
+        </div>
+        <div class="col" style="text-align: left">
+            <label for="recognition" style="font-weight: bold">Custom recognition sequence 2 (optional)</label>
+            <input class="form-control" name="custom-rec-2" placeholder="Mark cut site with asterisk">
+        </div>
+    </div>
+    <div class="form-group" style="text-align: left">
+        <div class="form-check form-check-inline">
+            <p style="font-size: 15px; font-weight: bold">Sort fragments:</p>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="sort-options" value="largest-to-smallest" checked>
+            <label class="form-check-label" for="largest-to-smallest">largest to smallest</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="sort-options" value="smallest-to-largest">
+            <label class="form-check-label" for="smallest-to-largest">smallest to largest</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="sort-options" value="order-in-sequence">
+            <label class="form-check-label" for="order-in-sequence">order in sequence</label>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-info btn-lg btn-block">Simulate Digest</button>
+</form>
+{% endblock %}
